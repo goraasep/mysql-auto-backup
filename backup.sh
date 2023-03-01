@@ -16,7 +16,7 @@ backup(){
     then mkdir --parents $dir/$tahun/$bulan/$tanggal;
   fi
   dump=/usr/bin/mysqldump
-  $dump $dbs -u$user -p$pass -h$host -R -K --triggers 〉 $dir/$tahun/$bulan/$tanggal/$dbs-$date.sql
+  $dump $dbs -u$user -p$pass -h$host -R -K --triggers > $dir/$tahun/$bulan/$tanggal/$dbs-$date.sql
   gzip -f $dir/$tahun/$bulan/$tanggal/$dbs-$date.sql
 }
 
