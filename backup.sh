@@ -5,7 +5,7 @@ user=userbackup
 pass=pass123
 host=localhost
 dir=/home/ecampuz/backup_sql
-
+port=3306
 #bagian-2
 backup(){
   date=$(date +%Y%m%d-%H%M)
@@ -16,7 +16,7 @@ backup(){
     then mkdir --parents $dir/$tahun/$bulan/$tanggal;
   fi
   dump=/usr/bin/mysqldump
-  $dump $dbs -u$user -p$pass -h$host -R -K --triggers > $dir/$tahun/$bulan/$tanggal/$dbs-$date.sql
+  $dump $dbs -u$user -p$pass -h$host -P$port -R -K --triggers > $dir/$tahun/$bulan/$tanggal/$dbs-$date.sql
   gzip -f $dir/$tahun/$bulan/$tanggal/$dbs-$date.sql
 }
 
@@ -41,4 +41,4 @@ done;
 exit 0
 
 #bagian-5
-rm `find /home/ecampuz/backup_sql/ -mtime +365`
+rm `find $dir/ -mtime +365`
